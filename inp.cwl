@@ -19,9 +19,9 @@ inputs:
     inputBinding:
       position: 2
       prefix: -i
-      separate: false
+      separate: false # -i9 のように、スペースを開けない。
   example_file:
-    type: File?
+    type: File? # 任意のinputであることを明示している。
     inputBinding:
       prefix: --file=
       separate: false
