@@ -106,7 +106,7 @@ outputs:
 
 ## 5. Capturing Standard Output
 
-ツールのstdoutをcaptureするにはどうするか。
+ツールのstdoutをcaptureするにはどうするか。`stdout`というパラメーターでstdoutをファイルに書くが、その際`type: stdout`がちゃんとないといけない。
 
 - Use the `stdout` field to specify a filename to capture streamed output.
 - The corresponding output parameter must have type: `stdout`.
@@ -115,4 +115,25 @@ outputs:
 $ cwl-runner stdout.cwl echo-job.yml
 ```
 
-## 6. 
+```yaml
+cwlVersion: v1.0
+class: CommandLineTool
+baseCommand: echo
+stdout: output.txt
+inputs:
+  message:
+    type: string
+    inputBinding:
+      position: 1
+outputs:
+  example_out:
+    type: stdout
+```
+
+rabixでみるとこんな感じ
+
+![rabix](img/5-1.png)
+
+## 6. Parameter References
+
+
