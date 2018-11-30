@@ -4,7 +4,7 @@
 
 ところで、しつこくkallistoをrabixでやっているのですが、tool単体ではテストはうまく行ったのですが、新しいワークフローを作るとindexがうまくkallisto_quant_singleに渡されません。なにか工夫がいるのでしょうか？
 
-![scr](img/181201.png)
+![scr](kallisto_index/img/181201.png)
 
 ```
 [2018-12-01 01:11:51.378] [INFO] Trying to find cached results in the directory rabix-cache/root/.kallisto_quant.meta
