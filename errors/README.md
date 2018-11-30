@@ -4,6 +4,8 @@
 
 ところで、しつこくkallistoをrabixでやっているのですが、tool単体ではテストはうまく行ったのですが、新しいワークフローを作るとindexがうまくkallisto_quant_singleに渡されません。なにか工夫がいるのでしょうか？
 
+使用したファイルはすべて[https://github.com/yyoshiaki/cwl_user_guide/tree/master/errors/kallisto_index](https://github.com/yyoshiaki/cwl_user_guide/tree/master/errors/kallisto_index) にまとめてあります。特におかしいワークフローはkallisto-pe.cwlです。
+
 ![scr](kallisto_index/img/181201.png)
 
 ```
