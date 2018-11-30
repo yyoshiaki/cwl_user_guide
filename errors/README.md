@@ -2,7 +2,7 @@
 
 ## 181201 kallisto workflowでindexがうまく引き渡されない
 
-ところで、しつこくkallistoをrabixでやっているのですが、tool単体ではテストはうまく行ったのですが、新しいワークフローを作るとindexがうまくkallisto_quant_singleに渡されません。なにか工夫がいるのでしょうか？
+kallistoのワークフローの作成をrabix composerでやっているのですが、tool単体ではテストはうまく行ったのですが、新しいワークフローを作るとindexがうまくkallisto_quantに渡されません。なにか工夫がいるのでしょうか？tool自体は[https://github.com/common-workflow-language/workflows](https://github.com/common-workflow-language/workflows) から取ってきました。ワークフローはrabix composerで作りました。
 
 使用したファイルはすべて[https://github.com/yyoshiaki/cwl_user_guide/tree/master/errors/kallisto_index](https://github.com/yyoshiaki/cwl_user_guide/tree/master/errors/kallisto_index) にまとめてあります。特におかしいワークフローは[kallisto-pe.cwl](https://github.com/yyoshiaki/cwl_user_guide/tree/master/errors/kallisto_index/kallisto-pe.cwl) です。
 
