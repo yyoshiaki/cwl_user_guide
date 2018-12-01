@@ -190,6 +190,59 @@ $ echo "public class Hello {}" > Hello.java
 $ cwl-runner arguments.cwl arguments-job.yml
 ```
 
+## 9. Array Inputs
+
+- Array parameter definitions are nested under the type field with type: array.
+- The appearance of array parameters on the command line differs depending on with the inputBinding field is provided in the description.
+- Use the itemSeparator field to control concatenatation of array parameters.
+
+```yaml
+inputs:
+  filesA:
+    type: string[]
+    inputBinding:
+      prefix: -A
+      position: 1
+
+  filesB:
+    type:
+      type: array
+      items: string
+      inputBinding:
+        prefix: -B=
+        separate: false
+    inputBinding:
+      position: 2
+
+  filesC:
+    type: string[]
+    inputBinding:
+      prefix: -C=
+      itemSeparator: ","
+      separate: false
+      position: 4
+```
+
+```yaml
+filesA: [one, two, three]
+filesB: [four, five, six]
+filesC: [seven, eight, nine]
+```
+
+```bash
+$ cwl-runner array-inputs.cwl array-inputs-job.yml
+...
+[job array-inputs.cwl] /private/tmp/docker_tmpe6z2k_w3$ echo \
+    -A \
+    one \
+    two \
+    three \
+    -B=four \
+    -B=five \
+    -B=six \
+    -C=seven,eight,nine > /private/tmp/docker_tmpe6z2k_w3/output.txt
+```
+
 ### 補足　inputがFileのarrayのとき
 
 ```
@@ -197,3 +250,29 @@ fastq:
 - {class: File, path: sample1_R1_001.fastq.gz}
 - {class: File, path: sample2_R1_001.fastq.gz}
 ```
+
+## 10. Array Outputs
+
+outputが複数ファイルのときなどはoutputにarrayを。ワイルドカードが便利。
+
+- You can capture multiple output files into an array of files using glob.
+- Use wildcards and filenames to specify the output files that will be returned after tool execution.
+
+```yaml
+baseCommand: touch
+inputs:
+  touchfiles:
+    type:
+      type: array
+      items: string
+    inputBinding:
+      position: 1
+outputs:
+  output:
+    type:
+      type: array
+      items: File
+    outputBinding:
+      glob: "*.txt"
+```
+
