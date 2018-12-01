@@ -1,0 +1,5 @@
+fastqs:
+  - {class: File, path: reads_1.fastq.gz}
+  - {class: File, path: reads_2.fastq.gz}
+fasta-files:
+  - {class: File, path: transcripts.fasta.gz}

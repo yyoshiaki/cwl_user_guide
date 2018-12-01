@@ -136,4 +136,64 @@ rabixでみるとこんな感じ
 
 ## 6. Parameter References
 
+`$(inputs.extractfile)`, `$(inputs["extractfile"])`, and `$(inputs['extractfile'])`は一緒。
+ちなみにFile名とかを使うときはたとえば `$(inputs.tarfile.path)`。parameter referenceで使えるもの一覧は[ここ](https://www.commonwl.org/user_guide/06-params/index.html)。
 
+
+- Some fields permit parameter references enclosed in $(...).
+- References are written using a subset of Javascript syntax.
+
+```bash
+$ rm hello.tar || true && touch goodbye.txt && tar -cvf hello.tar goodbye.txt
+$ cwl-runner tar-param.cwl tar-param-job.yml
+```
+
+## 7. Running Tools Inside Docker
+
+docker containerの指定はhintsでかく。`CMD [ "node" ]`とかで終わっていなくてもENTRYPOINTを指定しなくてもコンテナの中にそのツールが入っていれば大丈夫そう。
+
+```yaml
+baseCommand: node
+hints:
+  DockerRequirement:
+    dockerPull: node:slim
+inputs:
+  src:
+    type: File
+    inputBinding:
+      position: 1
+```
+
+- Containers can help to simplify management of the software requirements of a tool.
+- Specify a Docker image for a tool with DockerRequirement in the hints section.
+
+```bash
+$ echo "console.log(\"Hello World\");" > hello.js
+$ cwl-runner docker.cwl docker-job.yml
+```
+
+## 8. Additional Arguments and Parameters
+
+argumentsでパラメーターを指定しよう。ちなみに、`runtime` namespaceを使っている。他には`$(runtime.outdir)`,`$(runtime.tmpdir)`, `$(runtime.ram)`, `$(runtime.cores)`, ``$(runtime.outdirSize)`, `$(runtime.tmpdirSize)`などがある。
+
+```yaml
+arguments: ["-d", $(runtime.outdir)]
+```
+
+
+- Use the arguments section to describe command line options that do not correspond exactly to input parameters.
+- Runtime parameters provide information about the environment when the tool is actually executed.
+- Runtime parameters are referred under the runtime namespace.
+
+```bash
+$ echo "public class Hello {}" > Hello.java
+$ cwl-runner arguments.cwl arguments-job.yml
+```
+
+### 補足　inputがFileのarrayのとき
+
+```
+fastq:
+- {class: File, path: sample1_R1_001.fastq.gz}
+- {class: File, path: sample2_R1_001.fastq.gz}
+```
