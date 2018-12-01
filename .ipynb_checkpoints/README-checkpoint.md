@@ -276,3 +276,6 @@ outputs:
       glob: "*.txt"
 ```
 
+![10-1](img/10-1.png)
+
+rabixは6のoutputとちょっと違うみたい。
