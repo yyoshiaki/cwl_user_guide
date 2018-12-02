@@ -16,4 +16,4 @@ outputs:
       type: array
       items: File
     outputBinding:
-      glob: "*.txt"
+      glob: "*.txt"　# .txtしか拾わない。

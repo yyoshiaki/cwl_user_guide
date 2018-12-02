@@ -1,0 +1,3 @@
+fasta-files:
+  - class: File
+  - path: transcripts.fasta.gz

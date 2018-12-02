@@ -276,6 +276,10 @@ outputs:
       glob: "*.txt"
 ```
 
+```bash
+$ cwl-runner array-outputs.cwl array-outputs-job.yml
+```
+
 ![10-1](img/10-1.png)
 
 rabixは6のoutputとちょっと違うみたい。

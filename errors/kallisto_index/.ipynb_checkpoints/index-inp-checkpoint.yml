@@ -1,0 +1,4 @@
+fasta-files:
+  - class: File
+  - path: transcripts.fasta.gz
+  - format: http://edamontology.org/format_3823
