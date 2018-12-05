@@ -5,21 +5,21 @@ label: kallisto-pe
 $namespaces:
   sbg: 'https://www.sevenbridges.com'
 inputs:
-  - id: fastqs
-    type: 'File[]'
-    'sbg:x': -205.7967529296875
-    'sbg:y': 139.5
   - id: fasta-files
     type: 'File[]'
-    'sbg:x': -352
-    'sbg:y': -26
+    'sbg:x': -510.60113525390625
+    'sbg:y': -114
+  - id: fastqs
+    type: 'File[]'
+    'sbg:x': -379.60113525390625
+    'sbg:y': 126
 outputs:
   - id: quantification
     outputSource:
       - kallisto_quant/quantification
     type: File
-    'sbg:x': 107
-    'sbg:y': 96
+    'sbg:x': 92.39886474609375
+    'sbg:y': 64
 steps:
   - id: kallisto_index
     in:
@@ -29,8 +29,8 @@ steps:
     out:
       - id: index
     run: ./kallisto-index.cwl
-    'sbg:x': -181
-    'sbg:y': -25
+    'sbg:x': -354.6015625
+    'sbg:y': -105
   - id: kallisto_quant
     in:
       - id: fastqs
@@ -41,6 +41,6 @@ steps:
     out:
       - id: quantification
     run: ./kallisto-quant.cwl
-    'sbg:x': -16.7967529296875
-    'sbg:y': 91.5
+    'sbg:x': -122.60113525390625
+    'sbg:y': 85
 requirements: []
