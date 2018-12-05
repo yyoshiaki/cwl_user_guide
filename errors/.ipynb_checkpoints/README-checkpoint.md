@@ -1,6 +1,6 @@
 # cwlでつまずいたところ
 
-## 181201 kallisto workflowでindexがうまく引き渡されない
+## Solved : 181201 kallisto workflowでindexがうまく引き渡されない
 
 kallistoのワークフローの作成をrabix composerでやっているのですが、tool単体ではテストはうまく行ったのですが、新しいワークフローを作るとindexがうまくkallisto_quantに渡されません。なにか工夫がいるのでしょうか？tool自体は[https://github.com/common-workflow-language/workflows](https://github.com/common-workflow-language/workflows) から取ってきました。ワークフローはrabix composerで作りました。
 
@@ -28,3 +28,23 @@ Error: kallisto index file missing
 [2018-12-01 01:11:51.432] [DEBUG] Root job 658fa103-f0e3-46c7-8071-d72cbfe94f50 failed. Job root.kallisto_quant failed with exit code 1. with message: 
 Error: kallisto index file missing
 ```
+
+### 解決策
+
+Rabixの[issue](https://github.com/rabix/composer/issues/418#issuecomment-444257454)で解決策を教えてもらった。`kallisto-index.cwl`の`glob`がhardな指定だったのが原因だったよう。細かくはまだ理解が追いついていないが、とにかく動いた。
+
+>You will note that there is no inputs.index_name
+I changed it to *.idx since the index file name is hardcoded as index.idx
+Looks like at some point someone wanted to be able to name the index file and coded stuff up accordingly and then changed to the hardcoded form but forgot to change the glob.
+
+kallisto-index.cwl
+
+```
+glob: $(inputs.index_name)
+
+-> 
+
+glob: '*.idx'
+```
+
+![img](https://user-images.githubusercontent.com/19543497/49489669-8a5a8500-f88f-11e8-8dc6-7685bc35a2d8.png)
