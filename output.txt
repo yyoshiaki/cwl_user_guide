@@ -1,1 +1,1 @@
--A one two three -B=four -B=five -B=six -C=seven,eight,nine
+-A one -B two -C three
